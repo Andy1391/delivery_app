@@ -1,0 +1,16 @@
+= form_for @courier do |f|
+  - if @courier.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@courier.errors.count, "error")} prohibited this courier from being saved:"
+      %ul
+        - @courier.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :email
+    = f.text_field :email
+  .actions
+    = f.submit 'Save'

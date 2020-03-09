@@ -1,0 +1,16 @@
+%p#notice= notice
+
+%p
+  %b Tracking number:
+  = @package.tracking_number
+%p
+  %b Delivery status:
+  = @package.delivery_status
+%p
+  %b Courier:
+  = link_to @package.courier do
+    = @package.courier.name
+
+= link_to 'Edit', edit_package_path(@package)
+\|
+= link_to 'Back', packages_path

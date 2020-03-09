@@ -1,0 +1,31 @@
+%h1 Listing couriers
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Email 
+      %th 
+  %tbody
+    - @couriers.each do |courier|
+      %tr
+        %td= courier.name
+        %td= courier.email
+        %td
+          = link_to courier do
+            %i.fas.fa-eye
+            Show
+        %td
+          = link_to edit_courier_path(courier) do
+            %i.fas.fa-edit
+            Edit
+        %td
+          = link_to courier, method: :delete, data: { confirm: 'Are you sure?' } do
+            %i.fas.fa-trash
+            Destroy
+%br
+
+
+= link_to new_courier_path do
+  %i.fas.fa-user-plus
+  Add new courier

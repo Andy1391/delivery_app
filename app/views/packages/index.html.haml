@@ -1,0 +1,49 @@
+%h1 Listing packages 
+
+= search_form_for @q do |f|
+
+  =f.label :tracking_number_cont
+  =f.search_field :tracking_number_cont
+
+  =f.label :courier_id_eq
+  =f.select :courier_id_eq, Courier.all.map { |courier| [courier.name, courier.id] }
+  
+  =f.label :delivery_status_eq
+  =f.select :delivery_status_eq, options_for_select([ true, false ], true)
+  
+  = f.submit
+
+%table
+  %thead
+    %tr
+      %th Tracking number
+      %th Delivery status
+      %th Courier
+      %th
+      %th
+      %th
+
+  %tbody
+    - @packages.each do |package|
+      %tr
+        %td= package.tracking_number
+        %td= package.delivery_status
+        %td= package.courier.name
+        %td
+          = link_to package do
+            %i.fas.fa-eye
+            Show
+        %td
+          = link_to edit_package_path(package) do
+            %i.fas.fa-edit
+            Edit
+        %td
+          = link_to package, method: :delete, data: { confirm: 'Are you sure?' } do
+            %i.fas.fa-trash
+            Destroy
+
+%br
+
+= link_to new_package_path do
+  %i.fas.fa-box-open
+  Add new package

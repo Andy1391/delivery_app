@@ -1,0 +1,19 @@
+= form_for @package do |f|
+  - if @package.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@package.errors.count, "error")} prohibited this package from being saved:"
+      %ul
+        - @package.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :tracking_number
+    = f.text_field :tracking_number
+  .field
+    = f.label :delivery_status
+    = f.check_box :delivery_status
+  .field
+    = f.label :courier_id
+    = f.select :courier_id, Courier.all.map { |c| [c.name, c.id] }
+  .actions
+    = f.submit 'Save'
